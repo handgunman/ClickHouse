@@ -298,7 +298,7 @@ function run_tests()
         ADDITIONAL_OPTIONS+=('--replicated-database')
         # Too many tests fail for DatabaseReplicated in parallel.
         ADDITIONAL_OPTIONS+=('--jobs')
-        ADDITIONAL_OPTIONS+=('3')
+        ADDITIONAL_OPTIONS+=('4')
     elif [[ 1 == $(clickhouse-client --query "SELECT value LIKE '%SANITIZE_COVERAGE%' FROM system.build_options WHERE name = 'CXX_FLAGS'") ]]; then
         # Coverage on a per-test basis could only be collected sequentially.
         # Do not set the --jobs parameter.
@@ -315,6 +315,14 @@ function run_tests()
         ADDITIONAL_OPTIONS+=('--run-by-hash-total')
         ADDITIONAL_OPTIONS+=("$RUN_BY_HASH_TOTAL")
         HIGH_LEVEL_COVERAGE=NO
+    fi
+
+    if [[ "$USE_PARALLEL_REPLICAS_ON_REPLICATED_DB" -eq 1  ]]; then
+        ADDITIONAL_OPTIONS+=('--replace-log-with-rmt')
+        ADDITIONAL_OPTIONS+=('--replace-mt-with-rmt')
+        ADDITIONAL_OPTIONS+=('--test-parallel-replicas')
+        ADDITIONAL_OPTIONS+=('--no-shard')
+        ADDITIONAL_OPTIONS+=('--no-zookeeper')
     fi
 
     if [[ -n "$USE_DATABASE_ORDINARY" ]] && [[ "$USE_DATABASE_ORDINARY" -eq 1 ]]; then
