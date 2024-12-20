@@ -344,8 +344,6 @@ function run_tests()
 
     TEST_ARGS=(
         --testname
-        --shard
-        --zookeeper
         --check-zookeeper-session
         --hung-check
         --print-time
