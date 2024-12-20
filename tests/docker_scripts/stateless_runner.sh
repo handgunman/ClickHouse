@@ -323,6 +323,9 @@ function run_tests()
         ADDITIONAL_OPTIONS+=('--test-parallel-replicas')
         ADDITIONAL_OPTIONS+=('--no-shard')
         ADDITIONAL_OPTIONS+=('--no-zookeeper')
+    else
+        ADDITIONAL_OPTIONS+=('--shard')
+        ADDITIONAL_OPTIONS+=('--zookeeper')
     fi
 
     if [[ -n "$USE_DATABASE_ORDINARY" ]] && [[ "$USE_DATABASE_ORDINARY" -eq 1 ]]; then
