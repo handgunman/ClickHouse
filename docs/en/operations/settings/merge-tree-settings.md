@@ -1140,3 +1140,9 @@ When `cache_populated_by_fetch` is disabled (the default setting), new data part
 If enabled, `cache_populated_by_fetch` will instead cause all nodes to load new data parts from storage into their cache without requiring a query to trigger such an action. 
 
 Default value: 0.
+
+## assign_part_uuids
+
+Generate UUIDs for parts. Before enabling check that all replicas support new format.
+
+Default value: 0 (disable).
